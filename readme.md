@@ -11,7 +11,7 @@ the package, or by using the imperative API `openForm(options)`.
 
     npm install ink-form
 
-```typescript
+```typescript jsx
 const options = [
   { label: 'Opt 1', value: 'a' },
   { label: 'Opt 2', value: 'b' },
@@ -42,10 +42,21 @@ const form: FormProps = {
   },
 };
 
+// either:
 (async () => {
   const result = await openForm(form);
   console.log(`Finished with value`, result);
 })();
+
+// or:
+render(
+  <Form
+    form={form} 
+    onSubmit={result => {
+      console.log(`Finished with value`, result);
+    }} 
+  />
+);
 ```
 
 If you want to see how using `ink-form` feels, you can clone this repo, run `yarn` to install
