@@ -1,10 +1,21 @@
 {
   "name": "ink-form",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Complex user-friendly form component for React Ink",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "keywords": ["react", "cli", "ui", "component", "input", "forms", "reusable", "ink", "commandline", "cmd"],
+  "keywords": [
+    "react",
+    "cli",
+    "ui",
+    "component",
+    "input",
+    "forms",
+    "reusable",
+    "ink",
+    "commandline",
+    "cmd"
+  ],
   "repository": "https://github.com/lukasbach/ink-form",
   "author": "Lukas Bach <lbach@outlook.de>",
   "license": "MIT",
@@ -31,11 +42,11 @@
     "react": "^17.0.1"
   },
   "dependencies": {
-    "react": "^17.0.1",
     "ink": "^3.0.8",
     "ink-multi-select": "^2.0.0",
     "ink-quicksearch-input": "^1.0.0",
     "ink-select-input": "^4.2.0",
-    "ink-text-input": "^4.0.1"
+    "ink-text-input": "^4.0.1",
+    "react": "^17.0.1"
   }
 }
