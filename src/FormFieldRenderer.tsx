@@ -37,7 +37,7 @@ export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props =>
       props.onSetEditingField(props.field.label ?? props.field.name);
     } else if (isEditing && key.escape) {
       cancel();
-    } else if (isEditing && key.return) {
+    } else if (isEditing && key.return && (!manager?.needCtrlToReturnSave || key.ctrl)) {
       save();
     }
   }, { isActive: isFocused });

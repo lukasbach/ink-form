@@ -23,7 +23,7 @@ export class SelectFormFieldManager implements FormFieldManager<FormFieldSelect>
 
   public renderValue: React.FC<FormFieldValueRendererProps<FormFieldSelect>> = props => (
     <>
-      {props.field.options.find(option => option.value === props.value)?.label ?? 'No value'}
+      {props.field.options.find(option => option.value === props.value)?.label ?? props.value ?? 'No value'}
     </>
   );
 }

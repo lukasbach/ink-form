@@ -23,7 +23,7 @@ export class MultiSelectFormFieldManager implements FormFieldManager<FormFieldMu
 
   public renderValue: React.FC<FormFieldValueRendererProps<FormFieldMultiSelect>> = props => (
     <>
-      {props.field.options.filter(option => props.value?.includes(option.value))?.join(', ') ?? 'No value'}
+      {props.field.options.filter(option => props.value?.includes(option.value))?.map(option => option.label ?? option.value)?.join(', ') ?? 'No value'}
     </>
   );
 }
