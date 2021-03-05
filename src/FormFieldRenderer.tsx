@@ -9,7 +9,7 @@ export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props =>
   const [error, setError] = useState<string>();
   const [currentValue, setCurrentValue] = useState<any>(props.value ?? props.field.initialValue);
 
-  const isEditing = !!props.editingField && (props.editingField === (props.field.label ?? props.field.name));
+  const isEditing = !!props.editingField && props.editingField === (props.field.label ?? props.field.name);
   const hide = !isEditing && !!props.editingField;
 
   const save = (newValue?: any) => {
@@ -25,34 +25,39 @@ export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props =>
   };
 
   const cancel = () => {
-    setCurrentValue(props.value)
+    setCurrentValue(props.value);
     props.onSetEditingField(undefined);
     setError(undefined);
   };
 
-  const { isFocused } = useFocus({  });
+  const { isFocused } = useFocus({});
 
-  useInput((input, key) => {
-    if (!isEditing && key.return && !key.ctrl && !key.meta) {
-      props.onSetEditingField(props.field.label ?? props.field.name);
-    } else if (isEditing && key.escape) {
-      cancel();
-    } else if (isEditing && key.return && (!manager?.needCtrlToReturnSave || key.ctrl)) {
-      save();
-    }
-  }, { isActive: isFocused });
+  useInput(
+    (input, key) => {
+      if (!isEditing && key.return && !key.ctrl && !key.meta) {
+        props.onSetEditingField(props.field.label ?? props.field.name);
+      } else if (isEditing && key.escape) {
+        cancel();
+      } else if (isEditing && key.return && (!manager?.needCtrlToReturnSave || key.ctrl)) {
+        save();
+      }
+    },
+    { isActive: isFocused }
+  );
 
   if (hide) {
     return null;
   }
 
   if (!isEditing) {
-    const RenderValue = manager?.renderValue ?? (() => <>{props.value}</>)
+    const RenderValue = manager?.renderValue ?? (() => <>{props.value}</>);
     return (
       <Box marginX={2} paddingX={1} borderStyle="round" borderColor={isFocused ? 'blue' : undefined}>
         <Box flexGrow={1}>
-          <Text underline={isFocused} color={isFocused ? 'blue' : undefined}>{ props.field.label ?? props.field.name }</Text>
-          {props.field.required && (<Text color="red">*</Text>)}
+          <Text underline={isFocused} color={isFocused ? 'blue' : undefined}>
+            {props.field.label ?? props.field.name}
+          </Text>
+          {props.field.required && <Text color="red">*</Text>}
           <Text>: </Text>
           <Text dimColor>
             <RenderValue value={props.value as any} field={props.field} />
@@ -75,15 +80,11 @@ export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props =>
       value: currentValue,
       onSave: save,
       onCancel: cancel,
-      error
+      error,
     };
 
     if (!manager) {
-      component = (
-        <Text color="red">
-          No formfield manager for form field of type {props.field.type} available.
-        </Text>
-      );
+      component = <Text color="red">No formfield manager for form field of type {props.field.type} available.</Text>;
     } else {
       const Field = manager.renderField;
       component = <Field {...rendererProps} />;
@@ -92,16 +93,16 @@ export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props =>
     return (
       <Box paddingX={3} paddingY={1} flexDirection="column">
         <Box>
-          <Text>{ props.field.label ?? props.field.name }</Text>
-          {props.field.required && (<Text color="red">*</Text>)}
+          <Text>{props.field.label ?? props.field.name}</Text>
+          {props.field.required && <Text color="red">*</Text>}
           <Text>: </Text>
         </Box>
-        <Box>
-          {component}
-        </Box>
+        <Box>{component}</Box>
         {props.field.description && (
           <Box>
-            <Text dimColor><DescriptionRenderer description={props.field.description} /></Text>
+            <Text dimColor>
+              <DescriptionRenderer description={props.field.description} />
+            </Text>
           </Box>
         )}
         {error && (
@@ -114,11 +115,11 @@ export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props =>
             {error ? (
               <>Press ESC to cancel.</>
             ) : (
-              <>Press { manager?.needCtrlToReturnSave ? 'CTRL+Enter' : 'Enter' } to complete field, or ESC to cancel.</>
+              <>Press {manager?.needCtrlToReturnSave ? 'CTRL+Enter' : 'Enter'} to complete field, or ESC to cancel.</>
             )}
           </Text>
         </Box>
       </Box>
-    )
+    );
   }
 };

@@ -1,7 +1,8 @@
 import {
   FormFieldBoolean,
   FormFieldManager,
-  FormFieldValueRendererProps, SpecificFormFieldRendererProps,
+  FormFieldValueRendererProps,
+  SpecificFormFieldRendererProps,
   TypeOfField,
 } from '../types';
 import React from 'react';
@@ -25,17 +26,13 @@ export class BooleanFormFieldManager implements FormFieldManager<FormFieldBoolea
           </Text>
         </Box>
         <Box flexGrow={1}>
-          <Text>
-            Press Space to toggle value
-          </Text>
+          <Text>Press Space to toggle value</Text>
         </Box>
       </Box>
     );
   };
 
   public renderValue: React.FC<FormFieldValueRendererProps<FormFieldBoolean>> = props => (
-    <Text>
-      {props.value === undefined ? '[Not set]' : props.value ? '[True]' : '[False]'}
-    </Text>
+    <Text>{props.value === undefined ? '[Not set]' : props.value ? '[True]' : '[False]'}</Text>
   );
 }

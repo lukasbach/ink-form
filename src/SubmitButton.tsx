@@ -16,13 +16,11 @@ export const SubmitButton: React.FC<{
     <Box marginRight={2}>
       <Box marginRight={2} paddingY={1}>
         <Text>
-          {!props.canSubmit ? (
-            'There are still required inputs you have not competed yet.'
-          ) : isFocused ? (
-            'Press Enter to submit form'
-          ) : (
-            'Use the arrow keys to navigate to the submit button.'
-          )}
+          {!props.canSubmit
+            ? 'There are still required inputs you have not competed yet.'
+            : isFocused
+            ? 'Press Enter to submit form'
+            : 'Use the arrow keys to navigate to the submit button.'}
         </Text>
       </Box>
       <Box borderStyle={'round'} borderColor={!props.canSubmit ? 'gray' : isFocused ? 'blue' : 'white'} paddingX={2}>
@@ -31,6 +29,5 @@ export const SubmitButton: React.FC<{
         </Text>
       </Box>
     </Box>
-  )
-
-}
+  );
+};

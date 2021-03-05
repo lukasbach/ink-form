@@ -10,7 +10,11 @@ export const DescriptionRenderer: React.FC<{ description: Description }> = props
   } else if (Array.isArray(props.description)) {
     return (
       <Box flexDirection="column">
-        {props.description.map(line => <Box key={line} width="100%" marginBottom={1}><Text>{line}</Text></Box>)}
+        {props.description.map(line => (
+          <Box key={line} width="100%" marginBottom={1}>
+            <Text>{line}</Text>
+          </Box>
+        ))}
       </Box>
     );
   } else {

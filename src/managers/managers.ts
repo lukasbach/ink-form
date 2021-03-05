@@ -15,6 +15,9 @@ export const managers: FormFieldManager<FormField>[] = [
   new BooleanFormFieldManager(),
 ];
 
-export const getManager = (formFieldType: TypeOfField<FormField>, customManagers: FormFieldManager<FormField>[] = []) => {
+export const getManager = (
+  formFieldType: TypeOfField<FormField>,
+  customManagers: FormFieldManager<FormField>[] = []
+) => {
   return [...managers, ...customManagers].find(manager => manager.type === formFieldType);
 };

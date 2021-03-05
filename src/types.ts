@@ -82,7 +82,14 @@ export interface FormSection {
  * You can add your own form field by extending ``AbstractFormField`` and implementing
  * an associated ``FormFieldManager<CustomFormField>``.
  */
-export type FormField = FormFieldString | FormFieldInteger | FormFieldFloat | FormFieldSelect | FormFieldMultiSelect | FormFieldBoolean | AbstractFormField<any, any>;
+export type FormField =
+  | FormFieldString
+  | FormFieldInteger
+  | FormFieldFloat
+  | FormFieldSelect
+  | FormFieldMultiSelect
+  | FormFieldBoolean
+  | AbstractFormField<any, any>;
 
 export type ValueOfField<T extends FormField> = T extends AbstractFormField<any, infer V> ? V : never;
 export type TypeOfField<T extends FormField> = T extends AbstractFormField<infer V, any> ? V : never;
@@ -115,10 +122,9 @@ export type AbstractFormField<T extends string, V> = {
   required?: boolean;
   initialValue?: V;
   onChange?: (value: V, name: string) => void;
-}
+};
 
-export type FormFieldBoolean = AbstractFormField<'boolean', boolean> & {
-}
+export type FormFieldBoolean = AbstractFormField<'boolean', boolean> & {};
 
 export type FormFieldString = AbstractFormField<'string', string> & {
   /** Set to e.g. ``*`` to use as password field.  */
@@ -127,7 +133,7 @@ export type FormFieldString = AbstractFormField<'string', string> & {
   /** If supplied, the user cannot use a value which does not conform this regular expression. */
   regex?: RegExp;
   placeholder?: string;
-}
+};
 
 export type FormFieldInteger = AbstractFormField<'integer', number> & {
   min?: number;
@@ -135,7 +141,7 @@ export type FormFieldInteger = AbstractFormField<'integer', number> & {
   /** The user can use the arrow keys to increase or decrease the value by that step amount. */
   step?: number;
   placeholder?: string;
-}
+};
 
 export type FormFieldFloat = AbstractFormField<'float', number> & {
   min?: number;
@@ -143,15 +149,15 @@ export type FormFieldFloat = AbstractFormField<'float', number> & {
   /** The user can use the arrow keys to increase or decrease the value by that step amount. */
   step?: number;
   placeholder?: string;
-}
+};
 
 export type FormFieldSelect = AbstractFormField<'select', string> & {
-  options: Array<{ label?: string, value: string }>;
-}
+  options: Array<{ label?: string; value: string }>;
+};
 
 export type FormFieldMultiSelect = AbstractFormField<'multiselect', string[]> & {
-  options: Array<{ label?: string, value: string }>;
-}
+  options: Array<{ label?: string; value: string }>;
+};
 
 export interface FormFieldValueRendererProps<T extends FormField> {
   value?: ValueOfField<T>;
@@ -189,4 +195,4 @@ export type SpecificFormFieldRendererProps<T extends FormField> = FormFieldRende
   error?: string;
   onSave: (newValue?: ValueOfField<T>) => void;
   onCancel: () => void;
-}
+};

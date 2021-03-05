@@ -1,6 +1,8 @@
 import {
   FormFieldFloat,
-  FormFieldManager, FormFieldValueRendererProps, SpecificFormFieldRendererProps,
+  FormFieldManager,
+  FormFieldValueRendererProps,
+  SpecificFormFieldRendererProps,
   TypeOfField,
 } from '../types';
 import React from 'react';
@@ -10,15 +12,8 @@ export class FloatFormFieldManager implements FormFieldManager<FormFieldFloat> {
   public type: TypeOfField<FormFieldFloat> = 'float';
 
   public renderField: React.FC<SpecificFormFieldRendererProps<FormFieldFloat>> = props => (
-    <NumberFieldRenderer
-      {...props}
-      isFloat={true}
-    />
+    <NumberFieldRenderer {...props} isFloat={true} />
   );
 
-  public renderValue: React.FC<FormFieldValueRendererProps<FormFieldFloat>> = props => (
-    <>
-      {props.value}
-    </>
-  );
+  public renderValue: React.FC<FormFieldValueRendererProps<FormFieldFloat>> = props => <>{props.value}</>;
 }

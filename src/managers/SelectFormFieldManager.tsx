@@ -1,7 +1,8 @@
 import {
   FormFieldManager,
   FormFieldSelect,
-  FormFieldValueRendererProps, SpecificFormFieldRendererProps,
+  FormFieldValueRendererProps,
+  SpecificFormFieldRendererProps,
   TypeOfField,
 } from '../types';
 import React from 'react';
@@ -22,8 +23,6 @@ export class SelectFormFieldManager implements FormFieldManager<FormFieldSelect>
   );
 
   public renderValue: React.FC<FormFieldValueRendererProps<FormFieldSelect>> = props => (
-    <>
-      {props.field.options.find(option => option.value === props.value)?.label ?? props.value ?? 'No value'}
-    </>
+    <>{props.field.options.find(option => option.value === props.value)?.label ?? props.value ?? 'No value'}</>
   );
 }

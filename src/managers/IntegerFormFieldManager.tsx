@@ -12,15 +12,8 @@ export class IntegerFormFieldManager implements FormFieldManager<FormFieldIntege
   public type: TypeOfField<FormFieldInteger> = 'integer';
 
   public renderField: React.FC<SpecificFormFieldRendererProps<FormFieldInteger>> = props => (
-    <NumberFieldRenderer
-      {...props}
-      isFloat={false}
-    />
+    <NumberFieldRenderer {...props} isFloat={false} />
   );
 
-  public renderValue: React.FC<FormFieldValueRendererProps<FormFieldInteger>> = props => (
-    <>
-      {props.value}
-    </>
-  );
+  public renderValue: React.FC<FormFieldValueRendererProps<FormFieldInteger>> = props => <>{props.value}</>;
 }

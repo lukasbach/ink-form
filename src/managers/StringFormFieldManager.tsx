@@ -35,8 +35,12 @@ export class StringFormFieldManager implements FormFieldManager<FormFieldString>
   public renderValue: React.FC<FormFieldValueRendererProps<FormFieldString>> = props => (
     <Transform
       transform={
-        (props.value !== undefined && props.field.mask)
-          ? text => text.split('').map(char => '*').join('')
+        props.value !== undefined && props.field.mask
+          ? text =>
+              text
+                .split('')
+                .map(char => '*')
+                .join('')
           : text => text
       }
     >

@@ -6,7 +6,9 @@ import TextInput from 'ink-text-input';
 const FLOAT_REGEX = /^-?((\d+)|(\d*\.\d+))$/;
 const INTEGER_REGEX = /^-?\d+$/;
 
-export const NumberFieldRenderer: React.FC<SpecificFormFieldRendererProps<FormFieldInteger | FormFieldFloat> & {isFloat: boolean}> = props => {
+export const NumberFieldRenderer: React.FC<
+  SpecificFormFieldRendererProps<FormFieldInteger | FormFieldFloat> & { isFloat: boolean }
+> = props => {
   const regex = props.isFloat ? FLOAT_REGEX : INTEGER_REGEX;
   const parse = props.isFloat ? parseFloat : parseInt;
 
@@ -40,7 +42,9 @@ export const NumberFieldRenderer: React.FC<SpecificFormFieldRendererProps<FormFi
       }
     } else {
       if (key.upArrow || key.downArrow) {
-        change('' + ((props.field.min ?? 0) <= 0 && (props.field.max ?? 0) >= 0 ? 0 : props.field.min ?? props.field.max));
+        change(
+          '' + ((props.field.min ?? 0) <= 0 && (props.field.max ?? 0) >= 0 ? 0 : props.field.min ?? props.field.max)
+        );
       }
     }
   });
@@ -64,10 +68,8 @@ export const NumberFieldRenderer: React.FC<SpecificFormFieldRendererProps<FormFi
         />
       </Box>
       <Box>
-        <Text dimColor>
-          Press UP/DOWN to increase or decrease the value.
-        </Text>
+        <Text dimColor>Press UP/DOWN to increase or decrease the value.</Text>
       </Box>
     </Box>
-  )
-}
+  );
+};
