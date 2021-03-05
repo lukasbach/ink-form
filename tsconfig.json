@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "es2018"],
+    "esModuleInterop": true,
+    "jsx": "react",
+    "declaration": true,
+    "module": "CommonJS",
+    "outDir": "lib"
+  },
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.spec.tsx"]
+}
