@@ -5,13 +5,10 @@ import { FormProps } from './types';
 export const HELP_SECTION_ID = 'Help';
 
 export const FormHeader: React.FC<FormProps & { currentTab: number, onChangeTab: (tab: number) => void, editingField?: string, }> = props => {
-  const sections: typeof props.form.sections = [
-    ...props.form.sections,
-    { title: HELP_SECTION_ID, fields: [] }
-  ]
+  const sections = props.form.sections;
 
   useInput((input, key) => {
-    let id = undefined;
+    let id: undefined | number = undefined;
 
     if (key.rightArrow) {
       id = props.currentTab + 1;
@@ -21,7 +18,7 @@ export const FormHeader: React.FC<FormProps & { currentTab: number, onChangeTab:
       id = parseInt(input) - 1;
     }
 
-    if (id >= 0 && id < sections.length) {
+    if (id !== undefined && id >= 0 && id < sections.length) {
       props.onChangeTab(id);
     }
   }, { isActive: !props.editingField });
@@ -36,7 +33,7 @@ export const FormHeader: React.FC<FormProps & { currentTab: number, onChangeTab:
         </Box>
         <Box>
           <Text>
-            {!props.editingField ? 'Use Arrow keys to move around' : 'Press Escape to complete field'}
+            {!props.editingField ? 'Use arrow keys to move around' : 'Press ESC to cancel, or Enter to complete field'}
           </Text>
         </Box>
       </Box>

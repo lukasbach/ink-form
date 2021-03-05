@@ -8,11 +8,13 @@ const licenses = [
 
 render(
   <Form
+    onSubmit={value => console.log(`Submitted: `, value)}
     form={{
       title: "Edit your package.json file",
       sections: [
         {
           title: "Basics",
+          description: 'General attributes of your package.json file.',
           fields: [
             {
               type: 'boolean',
@@ -67,6 +69,7 @@ render(
         },
         {
           title: "Links",
+          description: 'URLs to external locations that are relevant for your poject.',
           fields: [
             {
               type: 'string',
@@ -99,6 +102,7 @@ render(
         },
         {
           title: "Files",
+          description: 'Files within your project structure that should be associated with your node project.',
           fields: [
             {
               type: 'string',
@@ -127,7 +131,8 @@ render(
           ]
         },
         {
-          title: 'scripts',
+          title: 'Scripts',
+          description: 'Command implementation for common npm lifecycle scripts.',
           fields: ['npm cache add', 'npm ci', 'npm diff', 'npm install', 'npm pack', 'npm publish', 'npm rebuild', 'npm restart', 'npm start', 'npm stop', 'npm test'].map(scriptName => ({
             type: 'string',
             name: `script-${scriptName}`,

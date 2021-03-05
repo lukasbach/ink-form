@@ -1,29 +1,32 @@
 import React from 'react';
-import { FormFieldRendererProps, SpecificFormFieldRendererProps } from './FormFieldRenderer';
-import { FormFieldInteger, FormFieldString } from './types';
+import { FormFieldFloat, FormFieldInteger, SpecificFormFieldRendererProps } from './types';
 import { Box, Text, useInput } from 'ink';
 import TextInput from 'ink-text-input';
 
 const FLOAT_REGEX = /^-?((\d+)|(\d*\.\d+))$/;
+const INTEGER_REGEX = /^-?\d+$/;
 
-export const FormFieldFloatRenderer: React.FC<SpecificFormFieldRendererProps<FormFieldInteger>> = props => {
+export const NumberFieldRenderer: React.FC<SpecificFormFieldRendererProps<FormFieldInteger | FormFieldFloat> & {isFloat: boolean}> = props => {
+  const regex = props.isFloat ? FLOAT_REGEX : INTEGER_REGEX;
+  const parse = props.isFloat ? parseFloat : parseInt;
+
   const change = (value: string) => {
-    if (FLOAT_REGEX.test(value)) {
+    if (regex.test(value)) {
       props.onClearError();
-      const asFloat = Math.round(parseFloat(value) * 100000) / 100000;
-      if (props.field.min !== undefined && props.field.min > asFloat) {
+      const asNumber = Math.round(parse(value) * 100000) / 100000;
+      if (props.field.min !== undefined && props.field.min > asNumber) {
         props.onError(`"${value}" too small, must be above or equal to ${props.field.min}.`);
         props.onChange(value as any);
         return;
-      } else if (props.field.max !== undefined && props.field.max < asFloat) {
+      } else if (props.field.max !== undefined && props.field.max < asNumber) {
         props.onError(`"${value}" too big, must be below or equal to ${props.field.max}.`);
         props.onChange(value as any);
         return;
       } else {
-        props.onChange(asFloat);
+        props.onChange(asNumber);
       }
     } else {
-      props.onError(`"${value}" is not an integer.`);
+      props.onError(`"${value}" is not an ${props.isFloat ? 'float' : 'integer'}.`);
       props.onChange(value as any);
     }
   };
@@ -48,11 +51,11 @@ export const FormFieldFloatRenderer: React.FC<SpecificFormFieldRendererProps<For
         <TextInput
           value={'' + (props.value ?? '')}
           onChange={value => {
-            if (FLOAT_REGEX.test(value)) {
+            if (regex.test(value)) {
               props.onClearError();
               change(value);
             } else {
-              props.onError(`"${value}" is not an float.`);
+              props.onError(`"${value}" is not an ${props.isFloat ? 'float' : 'integer'}.`);
               props.onChange(value as any);
             }
           }}

@@ -1,15 +1,19 @@
 import { Box, Newline, Text, useFocusManager, useInput } from 'ink';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import * as React from 'react';
 import { FormProps } from './types';
 import { FormHeader } from './FormHeader';
 import { FormFieldRenderer } from './FormFieldRenderer';
+import { DescriptionRenderer } from './DescriptionRenderer';
+import { canSubmit } from './canSubmit';
+import { SubmitButton } from './SubmitButton';
 
 export const Form: React.FC<FormProps> = props => {
   const isControlled = props.value !== undefined;
   const [currentTab, setCurrentTab] = useState(0)
   const [value, setValue] = useState<object>(props.value ?? {});
   const [editingField, setEditingField] = useState<string>();
+  const canSubmitForm = useMemo(() => canSubmit(props.form, value), [value, props.form]);
   const focusManager = useFocusManager();
 
   useEffect(() => {
@@ -17,7 +21,9 @@ export const Form: React.FC<FormProps> = props => {
   }, []);
 
   useEffect(() => {
-    setValue(props.value);
+    if (props.value) {
+      setValue(props.value);
+    }
   }, [props.value]);
 
   useEffect(() => {
@@ -47,8 +53,13 @@ export const Form: React.FC<FormProps> = props => {
   return (
     <Box width="100%" height="100%" flexDirection="column">
       <FormHeader {...props} currentTab={currentTab} onChangeTab={setCurrentTab} editingField={editingField} />
+      {!editingField && props.form.sections[currentTab].description && (
+        <Box marginX={4}>
+          <DescriptionRenderer description={props.form.sections[currentTab].description} />
+        </Box>
+      )}
       <Box flexDirection="column">
-        {currentTab >= props.form.sections.length ? null : (
+        {currentTab > props.form.sections.length - 1 ? null : (
           props.form.sections[currentTab].fields.map(field => (
             <FormFieldRenderer
               field={field}
@@ -58,10 +69,19 @@ export const Form: React.FC<FormProps> = props => {
               onChange={v => setValueAndPropagate(({ ...value, [field.name]: v }))}
               onSetEditingField={setEditingField}
               editingField={editingField}
+              customManagers={props.customManagers}
             />
           ))
         )}
       </Box>
+      {!editingField && (
+        <Box flexDirection="row-reverse">
+          <SubmitButton
+            canSubmit={canSubmitForm}
+            onSubmit={() => props.onSubmit?.(value)}
+          />
+        </Box>
+      )}
     </Box>
   )
 }

@@ -6,7 +6,8 @@
     "jsx": "react",
     "declaration": true,
     "module": "CommonJS",
-    "outDir": "lib"
+    "outDir": "lib",
+    "strictNullChecks": true
   },
   "exclude": ["node_modules", "**/*.spec.ts", "**/*.spec.tsx"]
 }

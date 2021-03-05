@@ -15,8 +15,11 @@
     "typescript": "^4.2.3"
   },
   "scripts": {
-    "demo:types": "ts-node src/demo/types.tsx",
+    "start": "ts-node src/demo/overview.tsx",
+    "demo:overview": "ts-node src/demo/overview.tsx",
     "demo:packagejson": "ts-node src/demo/packagejson.tsx",
+    "demo:custommanager": "ts-node src/demo/custommanager.tsx",
+    "demo:imperative": "ts-node src/demo/imperative.ts",
     "build": "tsc",
     "postinstall": "tsc"
   },

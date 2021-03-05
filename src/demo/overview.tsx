@@ -11,6 +11,7 @@ const options = [
 
 render(
   <Form
+    onSubmit={value => console.log(`Submitted: `, value)}
     form={{
       title: "Form title",
       sections: [
@@ -40,6 +41,15 @@ render(
             { type: 'multiselect', name: 'field21', label: 'Multi Select', options },
           ]
         },
+        {
+          title: 'Help Section',
+          description: [
+            'You can use a section without any fields and just a description attribute for additional documentation sections.',
+            'This section for example can help as a help page.',
+            'You could also add a "About", "Readme" or different pages.',
+          ],
+          fields: [],
+        }
       ]
     }}
   />

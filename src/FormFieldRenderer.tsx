@@ -1,32 +1,13 @@
-import React, { useCallback, useState } from 'react';
-import { FormField, FormStructure, ValueOfField } from './types';
-import { Box, useFocus, Text, useInput, Transform } from 'ink';
-import { FormFieldStringRenderer } from './FormFieldStringRenderer';
-import { FormFieldIntegerRenderer } from './FormFieldIntegerRenderer';
-import { FormFieldFloatRenderer } from './FormFieldFloatRenderer';
-import { FormFieldSelectRenderer } from './FormFieldSelectRenderer';
-import { FormFieldMultiSelectRenderer } from './FormFieldMultiSelectRenderer';
-
-export type FormFieldRendererProps<T extends FormField> = {
-  field: T;
-  form: FormStructure;
-  value: ValueOfField<T>;
-  onChange: (value: ValueOfField<T>) => void;
-  onSetEditingField: (field?: string) => void;
-  editingField?: string;
-};
-
-export type SpecificFormFieldRendererProps<T extends FormField> = FormFieldRendererProps<T> & {
-  onError: (error: string) => void;
-  onClearError: () => void;
-  error?: string;
-  onSave: (newValue?: ValueOfField<T>) => void;
-  onCancel: () => void;
-}
+import React, { useState } from 'react';
+import { FormField, FormFieldRendererProps, SpecificFormFieldRendererProps } from './types';
+import { Box, useFocus, Text, useInput } from 'ink';
+import { getManager } from './managers/managers';
+import { DescriptionRenderer } from './DescriptionRenderer';
 
 export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props => {
+  const manager = getManager(props.field.type, props.customManagers);
   const [error, setError] = useState<string>();
-  const [currentValue, setCurrentValue] = useState<any>(props.value);
+  const [currentValue, setCurrentValue] = useState<any>(props.value ?? props.field.initialValue);
 
   const isEditing = !!props.editingField && (props.editingField === (props.field.label ?? props.field.name));
   const hide = !isEditing && !!props.editingField;
@@ -66,22 +47,15 @@ export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props =>
   }
 
   if (!isEditing) {
+    const RenderValue = manager?.renderValue ?? (() => <>{props.value}</>)
     return (
       <Box marginX={2} paddingX={1} borderStyle="round" borderColor={isFocused ? 'blue' : undefined}>
         <Box flexGrow={1}>
-          <Text>{ props.field.label ?? props.field.name }</Text>
+          <Text underline={isFocused} color={isFocused ? 'blue' : undefined}>{ props.field.label ?? props.field.name }</Text>
           {props.field.required && (<Text color="red">*</Text>)}
           <Text>: </Text>
           <Text dimColor>
-            <Transform
-              transform={
-                (props.value !== undefined && props.field.mask)
-                  ? text => text.split('').map(char => '*').join('')
-                  : text => text
-              }
-            >
-              {props.value ?? 'No value'}
-            </Transform>
+            <RenderValue value={props.value as any} field={props.field} />
           </Text>
         </Box>
         {isFocused && (
@@ -93,7 +67,7 @@ export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props =>
     );
   } else {
     let component: JSX.Element;
-    const rendererProps: SpecificFormFieldRendererProps<any> = {
+    const rendererProps: SpecificFormFieldRendererProps<FormField> = {
       ...props,
       onError: setError,
       onClearError: () => setError(undefined),
@@ -104,27 +78,15 @@ export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props =>
       error
     };
 
-    switch (props.field.type) {
-      case 'string':
-        component = <FormFieldStringRenderer {...rendererProps as any} />;
-        break;
-      case 'integer':
-        component = <FormFieldIntegerRenderer {...rendererProps as any} />;
-        break;
-      case 'float':
-        component = <FormFieldFloatRenderer {...rendererProps as any} />;
-        break;
-      case 'select':
-        component = <FormFieldSelectRenderer {...rendererProps as any} />;
-        break;
-      case 'multiselect':
-        component = <FormFieldMultiSelectRenderer {...rendererProps as any} />;
-        break;
-      default:
-        component = (
-          <Text color="red">Unsupported field type: {props.field.type}</Text>
-        )
-        break;
+    if (!manager) {
+      component = (
+        <Text color="red">
+          No formfield manager for form field of type {props.field.type} available.
+        </Text>
+      );
+    } else {
+      const Field = manager.renderField;
+      component = <Field {...rendererProps} />;
     }
 
     return (
@@ -139,7 +101,7 @@ export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props =>
         </Box>
         {props.field.description && (
           <Box>
-            <Text dimColor>{props.field.description}</Text>
+            <Text dimColor><DescriptionRenderer description={props.field.description} /></Text>
           </Box>
         )}
         {error && (
@@ -152,12 +114,11 @@ export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props =>
             {error ? (
               <>Press ESC to cancel.</>
             ) : (
-              <>Press Enter to complete field, or ESC to cancel.</>
+              <>Press { manager?.needCtrlToReturnSave ? 'CTRL+Enter' : 'Enter' } to complete field, or ESC to cancel.</>
             )}
           </Text>
         </Box>
       </Box>
     )
   }
-
-}
+};
