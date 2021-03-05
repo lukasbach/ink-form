@@ -5,8 +5,8 @@ It can be used in two ways, either by using the React Ink component ``Form`` exp
 the package, or by using the imperative API ``openForm(options)``.
 
 
-![alt text](./demo/overview.gif "Demo 1")
-![alt text](./demo/packagejson.gif "Demo 2")
+![alt text](https://github.com/lukasbach/ink-form/raw/main/demo/overview.gif "Demo 1")
+![alt text](https://github.com/lukasbach/ink-form/raw/main/demo/packagejson.gif "Demo 2")
 
 ## Example usage
 
@@ -46,13 +46,44 @@ const form: FormProps = {
 })();
 ```
 
+If you want to see how using ``ink-form`` feels, you can clone this repo, run ``yarn`` to install
+dependencies and then run one of the demo scripts:
+
+- ``yarn demo:overview`` ([See Code](https://github.com/lukasbach/ink-form/blob/main/src/demo/overview.tsx))
+- ``yarn demo:packagejson`` ([See Code](https://github.com/lukasbach/ink-form/blob/main/src/demo/packagejson.tsx))
+- ``yarn demo:custommanager`` ([See Code](https://github.com/lukasbach/ink-form/blob/main/src/demo/custommanager.tsx))
+- ``yarn demo:imperative`` ([See Code](https://github.com/lukasbach/ink-form/blob/main/src/demo/imperative.ts))
+
+
+
 ## Documentation
 
-[TODO]
+Detailed documentation is available at [lukasbach.github.io/ink-form](https://lukasbach.github.io/ink-form/).
+Install the package with ``npm install ink-form --save`` or ``yarn add ink-form`` to your project.
 
+Then, render the form by invoking the [imperative interface](https://lukasbach.github.io/ink-form/modules.html#openform)
+or by rendering the [React Ink component](https://lukasbach.github.io/ink-form/modules.html#form).
+Both take [``FormProps``](https://lukasbach.github.io/ink-form/interfaces/formprops.html) as parameters.
+
+The most important property is the ``form``-property, which dictates how the form fields are structured. It follows
+the [``FormStructure``](https://lukasbach.github.io/ink-form/interfaces/formstructure.html)-interface. Look into the
+example above to see an example.
 
 ## Custom fields
 
-[TODO]
+A form field describes a type of input, i.e. text input, number input etc.
+Included are:
 
-![alt text](./demo/customfield.gif "Demo 3")
+- FormFieldString
+- FormFieldInteger
+- FormFieldFloat
+- FormFieldSelect
+- FormFieldMultiSelect
+- FormFieldBoolean
+
+You can add your own form field by extending
+[``AbstractFormField``](https://lukasbach.github.io/ink-form/modules.html#abstractformfield) 
+and implementing an associated 
+[``FormFieldManager<CustomFormField>``](https://lukasbach.github.io/ink-form/interfaces/formfieldmanager.html).
+
+![alt text](https://github.com/lukasbach/ink-form/raw/main/demo/customfield.gif "Demo 3")
