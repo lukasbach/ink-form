@@ -4,7 +4,6 @@ import {
   FormFieldValueRendererProps,
   SpecificFormFieldRendererProps,
   TypeOfField,
-  ValueOfField,
 } from '../types';
 import React from 'react';
 import { NumberFieldRenderer } from '../NumberFieldRenderer';

@@ -7,7 +7,10 @@
     "declaration": true,
     "module": "CommonJS",
     "outDir": "lib",
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "moduleResolution": "Node",
+    "allowJs": false,
+    "rootDir": "src"
   },
-  "exclude": ["node_modules", "**/*.spec.ts", "**/*.spec.tsx"]
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.spec.tsx", "lib", "docs"]
 }
