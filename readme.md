@@ -51,7 +51,7 @@ const form: FormProps = {
 // or:
 render(
   <Form
-    form={form} 
+    {...form}
     onSubmit={result => {
       console.log(`Finished with value`, result);
     }} 
