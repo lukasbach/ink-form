@@ -187,7 +187,6 @@ export type FormFieldRendererProps<T extends FormField> = {
   onSetEditingField: (field?: string) => void;
   editingField?: string;
   customManagers?: FormFieldManager<FormField>[];
-  onFocus?: () => void;
 };
 
 export type SpecificFormFieldRendererProps<T extends FormField> = FormFieldRendererProps<T> & {
