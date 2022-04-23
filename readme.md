@@ -54,7 +54,7 @@ render(
     {...form}
     onSubmit={result => {
       console.log(`Finished with value`, result);
-    }} 
+    }}
   />
 );
 ```
