@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import { FormField, FormFieldRendererProps, SpecificFormFieldRendererProps } from './types';
-import { Box, useFocus, Text, useInput } from 'ink';
+import { Box, useFocus, Text, useInput, DOMElement } from 'ink';
 import { getManager } from './managers/managers';
 import { DescriptionRenderer } from './DescriptionRenderer';
 
-export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props => {
+export const FormFieldRenderer = forwardRef<DOMElement, FormFieldRendererProps<any>>((props, ref) => {
   const manager = getManager(props.field.type, props.customManagers);
   const [error, setError] = useState<string>();
   const [currentValue, setCurrentValue] = useState<any>(props.value ?? props.field.initialValue);
@@ -45,6 +45,12 @@ export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props =>
     { isActive: isFocused }
   );
 
+  useEffect(() => {
+    if (isFocused) {
+      props.onFocus?.();
+    }
+  }, [isFocused]);
+
   if (hide) {
     return null;
   }
@@ -52,7 +58,7 @@ export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props =>
   if (!isEditing) {
     const RenderValue = manager?.renderValue ?? (() => <>{props.value}</>);
     return (
-      <Box marginX={2} paddingX={1} borderStyle="round" borderColor={isFocused ? 'blue' : undefined}>
+      <Box marginX={2} paddingX={1} borderStyle="round" borderColor={isFocused ? 'blue' : undefined} ref={ref}>
         <Box flexGrow={1}>
           <Text underline={isFocused} color={isFocused ? 'blue' : undefined}>
             {props.field.label ?? props.field.name}
@@ -91,7 +97,7 @@ export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props =>
     }
 
     return (
-      <Box paddingX={3} paddingY={1} flexDirection="column">
+      <Box paddingX={3} paddingY={1} flexDirection="column" ref={ref}>
         <Box>
           <Text>{props.field.label ?? props.field.name}</Text>
           {props.field.required && <Text color="red">*</Text>}
@@ -122,4 +128,4 @@ export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props =>
       </Box>
     );
   }
-};
+})
