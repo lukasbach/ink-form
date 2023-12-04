@@ -1,5 +1,5 @@
 import { render } from 'ink';
-import { Form } from '../Form';
+import { Form } from '../Form.js';
 import React from 'react';
 
 const options = [
@@ -38,7 +38,6 @@ render(
           title: "Selection fields",
           fields: [
             { type: 'select', name: 'field20', label: 'Select', options },
-            { type: 'multiselect', name: 'field21', label: 'Multi Select', options },
           ]
         },
         {

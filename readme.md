@@ -9,7 +9,7 @@ the package, or by using the imperative API `openForm(options)`.
 
 ## Example usage
 
-    npm install ink-form
+    npm install ink-form react ink
 
 ```typescript jsx
 const options = [
@@ -66,6 +66,13 @@ dependencies and then run one of the demo scripts:
 - `yarn demo:packagejson` ([See Code](https://github.com/lukasbach/ink-form/blob/main/src/demo/packagejson.tsx))
 - `yarn demo:custommanager` ([See Code](https://github.com/lukasbach/ink-form/blob/main/src/demo/custommanager.tsx))
 - `yarn demo:imperative` ([See Code](https://github.com/lukasbach/ink-form/blob/main/src/demo/imperative.ts))
+
+## Update Note
+
+This package is now pure ESM as of 2.0.0. (Details: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c)
+
+With that upgrade, I had to remove the multi select component as its dependency does not support ESM. Please
+use the v1x version branch with CJS if you need that.
 
 ## Documentation
 

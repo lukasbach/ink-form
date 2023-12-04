@@ -1,15 +1,13 @@
-import { FloatFormFieldManager } from './FloatFormFieldManager';
-import { IntegerFormFieldManager } from './IntegerFormFieldManager';
-import { MultiSelectFormFieldManager } from './MultiSelectFormFieldManager';
-import { SelectFormFieldManager } from './SelectFormFieldManager';
-import { FormField, FormFieldManager, TypeOfField } from '../types';
-import { StringFormFieldManager } from './StringFormFieldManager';
-import { BooleanFormFieldManager } from './BooleanFormFieldManager';
+import { FloatFormFieldManager } from './FloatFormFieldManager.js';
+import { IntegerFormFieldManager } from './IntegerFormFieldManager.js';
+import { SelectFormFieldManager } from './SelectFormFieldManager.js';
+import { FormField, FormFieldManager, TypeOfField } from '../types.js';
+import { StringFormFieldManager } from './StringFormFieldManager.js';
+import { BooleanFormFieldManager } from './BooleanFormFieldManager.js';
 
 export const managers: FormFieldManager<FormField>[] = [
   new FloatFormFieldManager(),
   new IntegerFormFieldManager(),
-  new MultiSelectFormFieldManager(),
   new SelectFormFieldManager(),
   new StringFormFieldManager(),
   new BooleanFormFieldManager(),

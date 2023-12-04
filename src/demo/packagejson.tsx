@@ -1,5 +1,5 @@
 import { render } from 'ink';
-import { Form } from '../Form';
+import { Form } from '../Form.js';
 import React from 'react';
 
 const licenses = [

@@ -1,5 +1,5 @@
-import { openForm } from '../imperativeInterface';
-import { FormProps } from '../types';
+import { openForm } from '../imperativeInterface.js';
+import { FormProps } from '../types.js';
 
 const form: FormProps = {
   form: {

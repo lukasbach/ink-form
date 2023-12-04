@@ -1,5 +1,5 @@
 import React from 'react';
-import { Description } from './types';
+import { Description } from './types.js';
 import { Box, Text } from 'ink';
 
 export const DescriptionRenderer: React.FC<{ description: Description }> = props => {

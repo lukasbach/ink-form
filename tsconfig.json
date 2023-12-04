@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "es2018"],
+    "target": "ESNext",
+    "lib": ["ESNext"],
     "esModuleInterop": true,
     "jsx": "react",
     "declaration": true,
-    "module": "CommonJS",
+    "module": "Node16",
     "outDir": "lib",
     "strictNullChecks": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "Node16",
     "allowJs": false,
     "rootDir": "src"
   },

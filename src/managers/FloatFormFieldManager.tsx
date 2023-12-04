@@ -4,9 +4,9 @@ import {
   FormFieldValueRendererProps,
   SpecificFormFieldRendererProps,
   TypeOfField,
-} from '../types';
+} from '../types.js';
 import React from 'react';
-import { NumberFieldRenderer } from '../NumberFieldRenderer';
+import { NumberFieldRenderer } from '../NumberFieldRenderer.js';
 
 export class FloatFormFieldManager implements FormFieldManager<FormFieldFloat> {
   public type: TypeOfField<FormFieldFloat> = 'float';

@@ -1,4 +1,4 @@
-import { FormStructure } from './types';
+import { FormStructure } from './types.js';
 
 export const canSubmit = (form: FormStructure, value: object) => {
   return form.sections
