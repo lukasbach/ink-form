@@ -1,12 +1,12 @@
 import { Box, useFocusManager, useInput } from 'ink';
 import { useEffect, useMemo, useState } from 'react';
 import * as React from 'react';
-import { FormProps } from './types';
-import { FormHeader } from './FormHeader';
-import { FormFieldRenderer } from './FormFieldRenderer';
-import { DescriptionRenderer } from './DescriptionRenderer';
-import { canSubmit } from './canSubmit';
-import { SubmitButton } from './SubmitButton';
+import { FormProps } from './types.js';
+import { FormHeader } from './FormHeader.js';
+import { FormFieldRenderer } from './FormFieldRenderer.js';
+import { DescriptionRenderer } from './DescriptionRenderer.js';
+import { canSubmit } from './canSubmit.js';
+import { SubmitButton } from './SubmitButton.js';
 
 export const Form: React.FC<FormProps> = props => {
   const isControlled = props.value !== undefined;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormFieldFloat, FormFieldInteger, SpecificFormFieldRendererProps } from './types';
+import { FormFieldFloat, FormFieldInteger, SpecificFormFieldRendererProps } from './types.js';
 import { Box, Text, useInput } from 'ink';
 import TextInput from 'ink-text-input';
 

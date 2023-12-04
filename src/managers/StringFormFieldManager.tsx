@@ -4,7 +4,7 @@ import {
   FormFieldValueRendererProps,
   SpecificFormFieldRendererProps,
   TypeOfField,
-} from '../types';
+} from '../types.js';
 import React from 'react';
 import { Box, Text, Transform } from 'ink';
 import TextInput from 'ink-text-input';

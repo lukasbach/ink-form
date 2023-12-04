@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, Text, useInput } from 'ink';
-import { FormProps } from './types';
+import { FormProps } from './types.js';
 
 export const HELP_SECTION_ID = 'Help';
 

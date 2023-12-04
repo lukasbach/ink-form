@@ -9,7 +9,7 @@ the package, or by using the imperative API `openForm(options)`.
 
 ## Example usage
 
-    npm install ink-form
+    npm install ink-form react ink
 
 ```typescript jsx
 const options = [

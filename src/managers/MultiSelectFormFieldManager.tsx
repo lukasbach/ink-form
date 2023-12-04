@@ -4,7 +4,7 @@ import {
   FormFieldValueRendererProps,
   SpecificFormFieldRendererProps,
   TypeOfField,
-} from '../types';
+} from '../types.js';
 import React from 'react';
 import { Box } from 'ink';
 import SelectInput from 'ink-multi-select';
@@ -14,7 +14,7 @@ export class MultiSelectFormFieldManager implements FormFieldManager<FormFieldMu
 
   public renderField: React.FC<SpecificFormFieldRendererProps<FormFieldMultiSelect>> = props => (
     <Box borderStyle={'round'} width="100%">
-      <SelectInput
+      <SelectInput.default
         items={props.field.options.map(option => ({ value: option.value, label: option.label ?? option.value }))}
         onSelect={option => props.onChange([...(props.value ?? []), option.value as string])}
         onUnselect={option => props.onChange((props.value ?? []).filter(value => value !== option.value))}

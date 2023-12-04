@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { FormField, FormFieldRendererProps, SpecificFormFieldRendererProps } from './types';
+import { FormField, FormFieldRendererProps, SpecificFormFieldRendererProps } from './types.js';
 import { Box, useFocus, Text, useInput } from 'ink';
-import { getManager } from './managers/managers';
-import { DescriptionRenderer } from './DescriptionRenderer';
+import { getManager } from './managers/managers.js';
+import { DescriptionRenderer } from './DescriptionRenderer.js';
 
 export const FormFieldRenderer: React.FC<FormFieldRendererProps<any>> = props => {
   const manager = getManager(props.field.type, props.customManagers);
