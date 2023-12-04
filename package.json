@@ -40,6 +40,7 @@
     "demo:imperative": "ts-node-esm src/demo/imperative.ts",
     "build": "tsc",
     "build:docs": "typedoc --out docs src/index.ts",
+    "lint": "prettier --check .",
     "prettier:check": "prettier --check .",
     "prettier:write": "prettier --write ."
   },
