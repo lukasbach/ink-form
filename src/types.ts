@@ -76,7 +76,6 @@ export interface FormSection {
  * - FormFieldInteger
  * - FormFieldFloat
  * - FormFieldSelect
- * - FormFieldMultiSelect
  * - FormFieldBoolean
  *
  * You can add your own form field by extending ``AbstractFormField`` and implementing
@@ -87,7 +86,6 @@ export type FormField =
   | FormFieldInteger
   | FormFieldFloat
   | FormFieldSelect
-  | FormFieldMultiSelect
   | FormFieldBoolean
   | AbstractFormField<any, any>;
 
@@ -152,10 +150,6 @@ export type FormFieldFloat = AbstractFormField<'float', number> & {
 };
 
 export type FormFieldSelect = AbstractFormField<'select', string> & {
-  options: Array<{ label?: string; value: string }>;
-};
-
-export type FormFieldMultiSelect = AbstractFormField<'multiselect', string[]> & {
   options: Array<{ label?: string; value: string }>;
 };
 

@@ -48,8 +48,6 @@
     "react": ">17"
   },
   "dependencies": {
-    "ink-multi-select": "^2.0.0",
-    "ink-quicksearch-input": "^1.0.0",
     "ink-select-input": "^5.0.0",
     "ink-text-input": "^5.0.1"
   }

@@ -38,7 +38,6 @@ render(
           title: "Selection fields",
           fields: [
             { type: 'select', name: 'field20', label: 'Select', options },
-            { type: 'multiselect', name: 'field21', label: 'Multi Select', options },
           ]
         },
         {
