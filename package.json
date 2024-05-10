@@ -1,7 +1,7 @@
 {
   "name": "ink-form",
   "type": "module",
-  "version": "2.1.0",
+  "version": "2.0.1",
   "description": "Complex user-friendly form component for React Ink",
   "main": "lib/index.js",
   "exports": "./lib/index.js",
@@ -46,7 +46,7 @@
   },
   "peerDependencies": {
     "ink": "^4",
-    "react": "^17"
+    "react": "^18"
   },
   "dependencies": {
     "ink-select-input": "^5.0.0",
