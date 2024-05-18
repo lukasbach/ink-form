@@ -50,6 +50,6 @@
   },
   "dependencies": {
     "ink-select-input": "^5.0.0",
-    "ink-text-input": "^5.0.1"
+    "ink-text-input": "^6.0.0"
   }
 }
