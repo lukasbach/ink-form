@@ -17,7 +17,7 @@ export const SubmitButton: React.FC<{
       <Box marginRight={2} paddingY={1}>
         <Text>
           {!props.canSubmit
-            ? 'There are still required inputs you have not competed yet.'
+            ? 'There are still required inputs you have not completed yet.'
             : isFocused
             ? 'Press Enter to submit form'
             : 'Use the arrow keys to navigate to the submit button.'}
